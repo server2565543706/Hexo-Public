@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="cn">
+
+<head>
+    
+    <title>红队专用免杀木马生成工具 - RunCtf</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
+    <meta name="description" content="摧日：CuiRi 红队专用免杀木马生成工具     0x01 简介：123456789   ____   __    __    _____      ______      _____    &#x2F; ___)  ) )  ( (   (_   _)    (   __ \    (_   _)  &#x2F; &#x2F;     ( (    ) )    | |       ) (__) )     | |   (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红队专用免杀木马生成工具">
+<meta property="og:url" content="http://runctf.cn/2022/10/17/cuiri/index.html">
+<meta property="og:site_name" content="RunCtf">
+<meta property="og:description" content="摧日：CuiRi 红队专用免杀木马生成工具     0x01 简介：123456789   ____   __    __    _____      ______      _____    &#x2F; ___)  ) )  ( (   (_   _)    (   __ \    (_   _)  &#x2F; &#x2F;     ( (    ) )    | |       ) (__) )     | |   (">
+<meta property="og:locale">
+<meta property="og:image" content="https://img.shields.io/badge/%E4%BD%9C%E8%80%85-Dubh3-green">
+<meta property="og:image" content="https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80-Golang-green">
+<meta property="og:image" content="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-1.0-brightgreen">
+<meta property="og:image" content="https://img.shields.io/badge/%E5%BC%80%E6%94%BE%E5%8D%8F%E8%AE%AE-Apache%202.0-brightgreen.svg">
+<meta property="og:image" content="http://runctf.cn/2022/10/17/cuiri/3.jpg">
+<meta property="og:image" content="http://runctf.cn/2022/10/17/cuiri/4.jpg">
+<meta property="og:image" content="http://runctf.cn/2022/10/17/cuiri/1.jpg">
+<meta property="og:image" content="http://runctf.cn/2022/10/17/cuiri/2.jpg">
+<meta property="article:published_time" content="2022-10-17T04:16:01.000Z">
+<meta property="article:modified_time" content="2023-01-11T16:35:33.792Z">
+<meta property="article:author" content="JunHou">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shields.io/badge/%E4%BD%9C%E8%80%85-Dubh3-green">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1673454978794">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1673454978794">
+
+    
+        
+            <link rel="stylesheet" href="/custom.css?v=1673454978794">
+        
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://tenapi.cn/acg/?100)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="JunHou" class="mdui-btn mdui-btn-icon"><img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="JunHou">
+            <img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou" alt="JunHou">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>13</div>
+        <div><span>Tags</span>5</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY/index.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1673454978794"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/289146211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/server2565543706"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/dcncloud"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ctf/" style="font-size: 10px;">ctf</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/" style="font-size: 10px;">栈溢出</a> <a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 10px;">渗透</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(5);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    Hitokoto
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.onload = function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  }
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/">山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/15/%E5%8E%9F%E7%A5%9E%E6%9C%8D%E5%8A%A1%E5%8C%BA%E8%BD%AC%E6%8D%A2/">原神换服</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/CTFd/">部署CTFd</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/w1r3s-editable/">w1r3s-editable解题笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/10/%E7%AC%94%E8%AE%B0/">Pwn的学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 JunHou
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://beian.miit.gov.cn/">	鲁ICP备2022032031-1号</a>
+        <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/hititle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: NaN%;"> 
+            <img src="https://tenapi.cn/acg/?3" alt="红队专用免杀木马生成工具" loading="lazy">
+            <h1>红队专用免杀木马生成工具</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2022年10月17日</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1 id="摧日：CuiRi-红队专用免杀木马生成工具"><a href="#摧日：CuiRi-红队专用免杀木马生成工具" class="headerlink" title="摧日：CuiRi 红队专用免杀木马生成工具"></a>摧日：CuiRi 红队专用免杀木马生成工具</h1><p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://img.shields.io/badge/%E4%BD%9C%E8%80%85-Dubh3-green" alt="Author" data-caption="Author" loading="lazy">  <img onerror="imgOnError(this);" data-fancybox="gallery" src="https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80-Golang-green" alt="language" data-caption="language" loading="lazy"> <img onerror="imgOnError(this);" data-fancybox="gallery" src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-1.0-brightgreen" alt="version" data-caption="version" loading="lazy"> <img onerror="imgOnError(this);" data-fancybox="gallery" src="https://img.shields.io/badge/%E5%BC%80%E6%94%BE%E5%8D%8F%E8%AE%AE-Apache%202.0-brightgreen.svg" alt="开放协议" data-caption="开放协议" loading="lazy"></p>
+<h3 id="0x01-简介："><a href="#0x01-简介：" class="headerlink" title="0x01 简介："></a>0x01 简介：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   ____   __    __    _____      ______      _____  </span><br><span class="line">  / ___)  ) )  ( (   (_   _)    (   __ \    (_   _) </span><br><span class="line"> / /     ( (    ) )    | |       ) (__) )     | |   </span><br><span class="line">( (       ) )  ( (     | |      (    __/      | |   </span><br><span class="line">( (      ( (    ) )    | |       ) \ \  _     | |   </span><br><span class="line"> \ \___   ) \__/ (    _| |__    ( ( \ \_))   _| |__ </span><br><span class="line">  \____)  \______/   /_____(     )_) \__/   /_____( </span><br><span class="line"></span><br><span class="line">摧日：一款红队专用免杀木马生成器，基于shellcode生成绕过所有杀软的木马</span><br></pre></td></tr></table></figure>
+
+<p>CuiRi 是一款红队专用免杀木马生成器，该工具可以通过红队人员提供的一段 shellcode 快速生成一个绕过所有杀软的可执行木马。</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>1.基于 Syscall 进行免杀，且随机混淆，可过几乎所有杀软</li>
+<li>2.内置 go-strip 对 Go 生成的木马进行编译信息抹除与程序信息混淆</li>
+<li>3.工具本体只有 1 个 exe，搭配 Go 环境即可直接使用</li>
+</ul>
+<p>感谢 go-strip 作者 <a target="_blank" rel="noopener" href="https://github.com/boy-hack" title="@boy-hack">@boy-hack</a></p>
+<h3 id="0x02-使用："><a href="#0x02-使用：" class="headerlink" title="0x02 使用："></a>0x02 使用：</h3><p>从 <a target="_blank" rel="noopener" href="https://github.com/NyDubh3/CuiRi/releases/tag/v1.0" title="release">release</a> 中下载二进制文件，并且在系统上安装 Go 语言环境，然后将 shellcode 保存到1个txt文件中，即可使用本工具生成免杀马。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">   ____   __    __    _____      ______      _____</span><br><span class="line">  / ___)  ) )  ( (   (_   _)    (   __ \    (_   _)</span><br><span class="line"> / /     ( (    ) )    | |       ) (__) )     | |</span><br><span class="line">( (       ) )  ( (     | |      (    __/      | |</span><br><span class="line">( (      ( (    ) )    | |       ) \ \  _     | |</span><br><span class="line"> \ \___   ) \__/ (    _| |__    ( ( \ \_))   _| |__</span><br><span class="line">  \____)  \______/   /_____(     )_) \__/   /_____(</span><br><span class="line"></span><br><span class="line">摧日：一款红队专用免杀木马生成器，基于shellcode生成绕过所有杀软的木马</span><br><span class="line"></span><br><span class="line">警告：</span><br><span class="line">1.本工具仅用于企业内部测试，请勿用于任何非法犯罪活动，否则后果自负</span><br><span class="line">2.本工具需要Go语言环境，且使用时需要关闭杀软</span><br><span class="line">https://github.com/NyDubh3/CuiRi   Author:Dubh3</span><br><span class="line"></span><br><span class="line">[INFO] Current Version: 1.0</span><br><span class="line">Usage of CuiRi.exe:</span><br><span class="line">  -f string</span><br><span class="line">        通过shellcode生成免杀马</span><br><span class="line">  -manual</span><br><span class="line">        查看shellcode生成方法</span><br></pre></td></tr></table></figure>
+
+<p>CuiRi 支持的 shellcode 格式分为以下两种：</p>
+<p><strong>1.C语言字符串格式 shellcode：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50\x52&quot;</span></span><br><span class="line"><span class="string">&quot;\x48\x31\xd2\x51\x65\x48\x8b\x52\x60\x56\x48\x8b\x52\x18\x48&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x52\x20\x48\x8b\x72\x50\x48\x0f\xb7\x4a\x4a\x4d\x31\xc9&quot;</span></span><br><span class="line"><span class="string">&quot;\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41\xc1\xc9\x0d\x41&quot;</span></span><br><span class="line"><span class="string">&quot;\x01\xc1\xe2\xed\x52\x41\x51\x48\x8b\x52\x20\x8b\x42\x3c\x48&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.纯十六进制数值格式 shellcode:</strong></p>
+<p>注意：如果是从 Cobalt Strike 中生成的 bin 文件，请单独将 bin 里的十六进制复制保存到一个 txt 文件中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fce8 8900 0000 6089 e531 d264 8b52 308b</span><br><span class="line">520c 8b52 148b 7228 0fb7 4a26 31ff 31c0</span><br><span class="line">ac3c 617c 022c 20c1 cf0d 01c7 e2f0 5257</span><br><span class="line">8b52 108b 423c 01d0 8b40 7885 c074 4a01</span><br><span class="line">d050 8b48 188b 5820 01d3 e33c 498b 348b</span><br><span class="line">01d6 31ff 31c0 acc1 cf0d 01c7 38e0 75f4</span><br><span class="line">037d f83b 7d24 75e2 588b 5824 01d3 668b</span><br></pre></td></tr></table></figure>
+
+<h3 id="0x03-演示："><a href="#0x03-演示：" class="headerlink" title="0x03 演示："></a>0x03 演示：</h3><p><strong>(1) 生成 shellcode</strong></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/2022/10/17/cuiri/3.jpg" alt="1" data-caption="1" loading="lazy"></p>
+<p><strong>(2) 生成免杀马</strong></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/2022/10/17/cuiri/4.jpg" alt="2" data-caption="2" loading="lazy"></p>
+<p><strong>(3) 免杀效果</strong></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/2022/10/17/cuiri/1.jpg" alt="3" data-caption="3" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/2022/10/17/cuiri/2.jpg" alt="4" data-caption="4" loading="lazy"></p>
+
+    <p><img data-fancybox="gallery" src="https://www.luminesight.com/cdn/Server/ShouKuanMA.jpg"  alt="ShouKuanMA.jpg" data-caption="ShouKuanMA.jpg" loading="lazy"></p>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>JunHou<br>
+        <strong>Link：</strong><a href="http://runctf.cn/2022/10/17/cuiri/" title="http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;10&#x2F;17&#x2F;cuiri&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;10&#x2F;17&#x2F;cuiri&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%91%A7%E6%97%A5%EF%BC%9ACuiRi-%E7%BA%A2%E9%98%9F%E4%B8%93%E7%94%A8%E5%85%8D%E6%9D%80%E6%9C%A8%E9%A9%AC%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">摧日：CuiRi 红队专用免杀木马生成工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-%E7%AE%80%E4%BB%8B%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">0x01 简介：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-number">1.0.2.</span> <span class="toc-text">0x02 使用：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="toc-number">1.0.3.</span> <span class="toc-text">0x03 演示：</span></a></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/piao.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/canvas-nest.min.js"></script
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/shehuizhuyi.js"></script><!-- 点击出现爱心 --><script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/love.js"></script><!-- 点击出现彩色气球爆炸效果 --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/clickBom.js"></script>
+    <!-- themes/[theme_name]/layout/_script/comments.swig -->
+    {% include '_comments/gitalk.swig' %}
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="Search"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1673454978802"></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"log":false});</script></body>
+
+</html>

